@@ -23,9 +23,22 @@ const cartSlice = createSlice({
       // 5. 選択した商品idと違う物だけを集める。= 選択したidは集めないので削除したことになる。
       state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
     },
+    increase: (state, action) => {
+      const cartItem = state.cartItems.find(
+        (item) => item.id === action.payload
+      );
+      cartItem.amount = cartItem.amount + 1;
+    },
+    decrease: (state, action) => {
+      const cartItem = state.cartItems.find(
+        (item) => item.id === action.payload
+      );
+
+      cartItem.amount = cartItem.amount - 1;
+    },
   },
 });
 
 // 2. cartReducer.reducerの書き方でいいんだね。
 export default cartSlice.reducer;
-export const { clearCart, removeItem } = cartSlice.actions;
+export const { clearCart, removeItem, increase, decrease } = cartSlice.actions;
