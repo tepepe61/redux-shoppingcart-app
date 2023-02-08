@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/redux-shoppingcart-app
+    # commandをコメントアウトしてからcreate-react-appしてフォルダ作ってるけど、すごい二度手間じゃね?
     command: sh -c "cd redux-shoppingcart-app && npm start"
     ports:
       - "3000:3000"
