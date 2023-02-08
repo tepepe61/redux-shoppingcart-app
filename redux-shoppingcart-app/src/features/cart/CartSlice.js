@@ -7,6 +7,7 @@ const initialState = {
 };
 
 const cartSlice = createSlice({
+  // 3.nameがuseSelector((store) =>store.cart)の←cartになる
   name: "cart",
   // 1. 初期値
   initialState,
