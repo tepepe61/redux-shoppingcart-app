@@ -18,7 +18,6 @@ const cartSlice = createSlice({
       return { cartItems: [], amount: 0, total: 0 };
     },
     removeItem: (state, action) => {
-      console.log(action);
       const itemId = action.payload;
       // 5. 選択した商品idと違う物だけを集める。= 選択したidは集めないので削除したことになる。
       state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
@@ -36,9 +35,22 @@ const cartSlice = createSlice({
 
       cartItem.amount = cartItem.amount - 1;
     },
+    calculateTotals: (state) => {
+      let amount = 0;
+      let total = 0;
+
+      state.cartItems.forEach((item) => {
+        amount += item.amount;
+        total += item.amount * item.price;
+      });
+
+      state.amount = amount;
+      state.total = total;
+    },
   },
 });
 
 // 2. cartReducer.reducerの書き方でいいんだね。
 export default cartSlice.reducer;
-export const { clearCart, removeItem, increase, decrease } = cartSlice.actions;
+export const { clearCart, removeItem, increase, decrease, calculateTotals } =
+  cartSlice.actions;
